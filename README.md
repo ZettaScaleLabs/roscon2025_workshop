@@ -21,7 +21,7 @@ Welcome! This repository is part of the `ROS 2 Networking Redefined: Deep Dive i
 * [ROSCon UK](https://roscon.org.uk/2025/) 🇬🇧 🏴󠁧󠁢󠁳󠁣󠁴󠁿, on September 16th
 * [ROSCon Singapore](https://roscon.ros.org/2025/) 🇸🇬, on October 27th
 * [ROSCon FR & DE](https://roscon.ros.org/fr/2025/) 🇫🇷 🇩🇪, on November 18th
-* [ROSCon India](https://www.rosconindia.in/) IND, on December 20th
+* [ROSCon India](https://www.rosconindia.in/) 🇮🇳, on December 20th
 
 It contains all the resources you’ll need to get started with `rmw_zenoh`, the Zenoh middleware for `ROS 2`.
 
