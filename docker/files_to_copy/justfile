@@ -7,8 +7,24 @@ router:
    ros2 run rmw_zenoh_cpp rmw_zenohd
 
 # Launch Neobotix ROX simulation
+# Optional flags: no_camera (disables D435 depth camera), no_gui (headless mode)
 rox_simu *ARGS:
-   ros2 launch rox_bringup bringup_sim_launch.py arm_type:=ur10 scanner_type:=psenscan imu_enable:=True d435_enable:=True {{ARGS}}
+    #!/usr/bin/env bash
+    camera_arg="d435_enable:=True"
+    headless_arg=""
+    passthrough=()
+    for arg in {{ARGS}}; do
+        case "$arg" in
+            no_camera) camera_arg="d435_enable:=False" ;;
+            no_gui)    headless_arg="headless_simulation:=True" ;;
+            *)         passthrough+=("$arg") ;;
+        esac
+    done
+    ros2 launch rox_bringup bringup_sim_launch.py arm_type:=ur10 scanner_type:=psenscan imu_enable:=True "$camera_arg" $headless_arg "${passthrough[@]}"
+
+# Launch Gazebo GUI client (to be used alongside: just rox_simu no_gui)
+gz_gui *ARGS:
+   gz sim -g {{ARGS}}
 
 # Launch Neobotix ROX navigation stack (in simulation)
 rox_nav2 *ARGS:

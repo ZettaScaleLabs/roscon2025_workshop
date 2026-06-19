@@ -14,11 +14,6 @@ if [ -f ~/container_data/SESSION_CONFIG.json5 ]; then
     echo "  ZENOH_SESSION_CONFIG_URI=$ZENOH_SESSION_CONFIG_URI"
 fi
 
-# Tune SHM allocated space
-# The biggest payload here is the Realsense D435 point cloud: 7.37 MB
-# Let's allocate 24 MB to allow 3 in-flight data in SHM (2 could be enough if the Subscriber is fast enough, but it's a VM...)
-export ZENOH_SHM_ALLOC_SIZE=25165824
-
 # setup Neobotix ROX simulation environment
 source ~/rox_ws/install/setup.bash
 GZ_SIM_RESOURCE_PATH=~/rox_ws/src/rox:~/rox_ws/src/neo_gz_worlds/models/

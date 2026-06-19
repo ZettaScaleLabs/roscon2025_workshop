@@ -47,7 +47,7 @@ RUN apt-get install -y --no-install-recommends \
     && git clone --branch $ROS_DISTRO     https://github.com/neobotix/neo_local_planner2.git \
     && git clone --branch $ROS_DISTRO     https://github.com/neobotix/neo_localization2.git \
     && git clone --branch $ROS_DISTRO     https://github.com/neobotix/neo_rox_moveit2.git \
-    && git clone --branch master          https://github.com/neobotix/neo_common2 \
+    && git clone --branch $ROS_DISTRO     https://github.com/neobotix/neo_common2 \
     && git clone --branch master          https://github.com/neobotix/neo_msgs2 \
     && git clone --branch master          https://github.com/neobotix/neo_srvs2 \
     && git clone --branch main            https://github.com/neobotix/neo_gz_worlds.git \
