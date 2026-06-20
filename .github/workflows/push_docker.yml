@@ -29,7 +29,7 @@ on:
 jobs:
   docker-build-amd64:
     name: Docker AMD64 build and push
-    runs-on: [self-hosted, ubuntu-22.04, X64]
+    runs-on: [self-hosted, ubuntu, X64]
     steps:
       - uses: actions/checkout@v4
 
@@ -57,7 +57,7 @@ jobs:
 
   docker-build-arm64:
     name: Docker ARM64 build and push
-    runs-on: [self-hosted, ubuntu-22.04, ARM64]
+    runs-on: [self-hosted, ubuntu, ARM64]
     steps:
       - uses: actions/checkout@v4
 
@@ -86,7 +86,7 @@ jobs:
   docker-build-manifest:
     name: Docker manifest build and push
     needs: [docker-build-amd64, docker-build-arm64]
-    runs-on: [self-hosted, ubuntu-22.04, X64]
+    runs-on: [self-hosted, ubuntu, X64]
     steps:
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
