@@ -57,7 +57,7 @@ In robot container's `~/container_data/ROUTER_CONFIG.json5` file:
       endpoints: [
         // On lookback: listen on plain TCP for internal Nodes to connect
         "tcp/localhost:7447",
-        // On external IP: listen on TLS for remote connections
+        // On external IP: listen on TCP with TLS for remote connections
         "tls/172.1.0.2:7447"
       ],
       // ...
@@ -98,7 +98,7 @@ In control container's `~/container_data/SESSION_CONFIG.json5` file:
     connect: {
       // ...
       endpoints: [
-        // Connect to the robot's router with TLS
+        // Connect to the robot's router via TCP with TLS
         "tls/172.1.0.2:7447"
       ],
       // ...
@@ -129,6 +129,54 @@ In control container's `~/container_data/SESSION_CONFIG.json5` file:
     ```
 
 ## Run all
+
+* In the robot container, run:
+
+  * `just router`
+  * `just rox_simu`
+  * `just rox_nav2`
+
+* In the control container, run:
+
+  * `just rviz_nav2`
+
+## QUIC
+
+QUIC is a modern transport protocol built on UDP that provides built-in encryption, lower connection latency, resilience to packet loss, and multiple streams to avoid head-of-line blocking. Since QUIC uses mTLS natively, the same certificates and `transport/link/tls` configuration generated above apply without any change — simply replace `tls` with `quic` in the endpoint URLs.
+
+In robot container's `~/container_data/ROUTER_CONFIG.json5` file, change the `listen/endpoints` list as such:
+
+```json5
+// ...
+listen: {
+  // ...
+  endpoints: [
+    // On loopback: listen on plain TCP for internal Nodes to connect
+    "tcp/localhost:7447",
+    // On external IP: listen on QUIC for remote connections
+    "quic/172.1.0.2:7447"
+  ],
+  // ...
+},
+// ...
+```
+
+In control container's `~/container_data/SESSION_CONFIG.json5` file, change the `connect/endpoints` list as such:
+
+```json5
+// ...
+connect: {
+  // ...
+  endpoints: [
+    // Connect to the robot's router via QUIC
+    "quic/172.1.0.2:7447"
+  ],
+  // ...
+},
+// ...
+```
+
+Then run all as before:
 
 * In the robot container, run:
 
