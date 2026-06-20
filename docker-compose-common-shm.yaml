@@ -15,17 +15,24 @@ services:
       - shm-volume:/dev/shm
     working_dir: /home/ubuntu
     cap_add:
-      - NET_ADMIN
+      - NET_ADMIN  # for network_limit.sh script
     security_opt:
       - seccomp:unconfined
     networks:
       sim_network_2:
-        ipv4_address: 172.2.0.2
-    # By default, Ubuntu supports 8192 KiB, which is not enough for Zenoh shared memory
+        ipv4_address: 173.1.0.2
     ulimits:
+      # By default, Ubuntu supports 8192 KiB, which is not enough for Zenoh shared memory. Set to unlimited
       memlock:
         soft: -1  # "unlimited"
         hard: -1  # "unlimited"
+      # For Zenoh to set thread priority for its SHM watchdog (works better and avoid warnings)
+      rtprio:
+        soft: 99
+        hard: 99
+      nice:
+        soft: -20
+        hard: -20
 
   # Controller container with a common shared memory volume
   control-shm:
@@ -40,17 +47,24 @@ services:
       - shm-volume:/dev/shm
     working_dir: /home/ubuntu
     cap_add:
-      - NET_ADMIN
+      - NET_ADMIN  # for network_limit.sh script
     security_opt:
       - seccomp:unconfined
     networks:
       sim_network_2:
-        ipv4_address: 172.2.0.3
-    # By default, Ubuntu supports 8192 KiB, which is not enough for Zenoh shared memory
+        ipv4_address: 173.1.0.3
     ulimits:
+      # By default, Ubuntu supports 8192 KiB, which is not enough for Zenoh shared memory. Set to unlimited
       memlock:
         soft: -1  # "unlimited"
         hard: -1  # "unlimited"
+      # For Zenoh to set thread priority for its SHM watchdog (works better and avoid warnings)
+      rtprio:
+        soft: 99
+        hard: 99
+      nice:
+        soft: -20
+        hard: -20
 
 networks:
   # Custom bridge network with a specific subnet
@@ -58,7 +72,7 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.2.0.0/16
+        - subnet: 173.1.0.0/16
 
 volumes:
   # Common shared memory volume for the containers

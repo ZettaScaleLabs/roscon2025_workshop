@@ -107,9 +107,9 @@ You can experiment with this alternative setup of containers as such:
 
 4. On the control container on http://localhost:7081/
    - Run the camera latency measure, configured as a client connecting to the robot's router and with shared memory enabled:  
-     `ZENOH_CONFIG_OVERRIDE='mode="client";connect/endpoints=["tcp/172.2.0.2:7447"];transport/shared_memory/enabled=true' just cam_latency`
+     `ZENOH_CONFIG_OVERRIDE='mode="client";connect/endpoints=["tcp/173.1.0.2:7447"];transport/shared_memory/enabled=true' just cam_latency`
    - See the latency you get. To compare without shared memory, run:  
-      `ZENOH_CONFIG_OVERRIDE='mode="client";connect/endpoints=["tcp/172.2.0.2:7447"];transport/shared_memory/enabled=false' just cam_latency`
+      `ZENOH_CONFIG_OVERRIDE='mode="client";connect/endpoints=["tcp/173.1.0.2:7447"];transport/shared_memory/enabled=false' just cam_latency`
 
 5. When you are finished, just hit `CTRL+C` where you run `docker compose up` command. Then run `docker compose -f docker-compose-common-shm.yaml down`
 

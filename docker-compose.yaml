@@ -16,18 +16,25 @@ services:
       - ./container_volumes/robot_container:/home/ubuntu/container_data
     working_dir: /home/ubuntu
     cap_add:
-      - NET_ADMIN
+      - NET_ADMIN  # for network_limit.sh script
     shm_size: '640m'
     security_opt:
       - seccomp:unconfined
     networks:
       sim_network:
         ipv4_address: 172.1.0.2
-    # By default, Ubuntu supports 8192 KiB, which is not enough for Zenoh shared memory
     ulimits:
+      # By default, Ubuntu supports 8192 KiB, which is not enough for Zenoh shared memory. Set to unlimited
       memlock:
         soft: -1  # "unlimited"
         hard: -1  # "unlimited"
+      # For Zenoh to set thread priority for its SHM watchdog (works better and avoid warnings)
+      rtprio:
+        soft: 99
+        hard: 99
+      nice:
+        soft: -20
+        hard: -20
 
   # Controller container
   control:
@@ -41,18 +48,25 @@ services:
       - ./container_volumes/control_container:/home/ubuntu/container_data
     working_dir: /home/ubuntu
     cap_add:
-      - NET_ADMIN
+      - NET_ADMIN  # for network_limit.sh script
     shm_size: '640m'
     security_opt:
       - seccomp:unconfined
     networks:
       sim_network:
         ipv4_address: 172.1.0.3
-    # By default, Ubuntu supports 8192 KiB, which is not enough for Zenoh shared memory
     ulimits:
+      # By default, Ubuntu supports 8192 KiB, which is not enough for Zenoh shared memory. Set to unlimited
       memlock:
         soft: -1  # "unlimited"
         hard: -1  # "unlimited"
+      # For Zenoh to set thread priority for its SHM watchdog (works better and avoid warnings)
+      rtprio:
+        soft: 99
+        hard: 99
+      nice:
+        soft: -20
+        hard: -20
 
 networks:
   # Custom bridge network with a specific subnet
