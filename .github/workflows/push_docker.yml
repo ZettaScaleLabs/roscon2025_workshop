@@ -57,7 +57,7 @@ jobs:
 
   docker-build-arm64:
     name: Docker ARM64 build and push
-    runs-on: [self-hosted, ubuntu, ARM64]
+    runs-on: [self-hosted, Linux, ARM64]
     steps:
       - uses: actions/checkout@v4
 
