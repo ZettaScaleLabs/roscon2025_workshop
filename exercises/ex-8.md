@@ -6,7 +6,38 @@ Remote control and monitoring of a robot over the Internet could be challenging 
 
 Use a Zenoh deployed on Internet (e.g. in a Cloud instance) as an intermediary. Both your robot and your controler connects to this router, via TCP, TLS or even QUIC.
 
-For a simple test in this workshop, all the attendees will connect via TCP to the same router deployed on `roscon.zenoh.io`. However, since all the robots are using the same topics and services names, they will conflict with each other. We will now see the different solutions to overcome this issue.
+For a simple test in this workshop, all the attendees will connect via QUIC to the same router deployed on `roscon.zenoh.io`. At first, you need to update your robot and controlers TLS material with the same root CA used on `roson.zenoh.io`.
+
+Run those commands on your host:
+
+```bash
+# Download the root CA key and certificate from roscon.zenoh.io
+curl -O --output-dir tls/ http://roscon.zenoh.io/tls/root_ca.cert
+curl -O --output-dir tls/ http://roscon.zenoh.io/tls/root_ca.key
+
+# Create key and certificate for the robot (1 year validity)
+docker run -t --rm -v $PWD/tls:/home/step smallstep/step-cli \
+  step certificate create $USER.robot.local robot.crt robot.key \
+  --ca ./root_ca.crt --ca-key ./root_ca.key --no-password --insecure  --not-after=8760h
+
+# Create key and certificate for RVIz (1 year validity)
+docker run -t --rm -v $PWD/tls:/home/step smallstep/step-cli \
+  step certificate create $USER.control.local control.crt control.key \
+  --ca ./root_ca.crt --ca-key ./root_ca.key --no-password --insecure  --not-after=8760h
+
+# Copy root CA certificate and robot key and certificate to the robot container
+cp ./tls/root_ca.crt ./tls/robot.* ./container_volumes/robot_container/
+# Copy root CA certificate and RViz key and certificate to the control container
+cp ./tls/root_ca.crt ./tls/control.* ./container_volumes/control_container/
+```
+
+Then, make both the robot and the controller to connect to `roscon.zenoh.io` via QUIC:
+
+1. In robot container's `~/container_data/ROUTER_CONFIG.json5` file, modify the `connect/endpoints` list to only include `"quic/roscon.zenoh.io:7447"`
+
+2. In the control container's `~/container_data/SESSION_CONFIG.json5` file, modify the `connect/endpoints` list to only include `"quic/roscon.zenoh.io:7447"`
+
+However, since all the robots are using the same topics and services names, they will conflict with each other. We will now see the different solutions to overcome this issue.
 
 ## Use different ROS namespaces for each robot
 
@@ -34,19 +65,15 @@ To configure the namespace, edit the `~/container_data/SESSION_CONFIG.json5` fil
 Since the Zenoh key expressions will be prefixed by this namespace, the key expressions starting with `*/camera/` used in the router configuration for `downsampling` and `access_control` will no longer match the key expressions used by the nodes.  
 In robot's container, edit the `~/container_data/ROUTER_CONFIG.json5` file to make all those key expressions to start with `**/camera/`.
 
-## Connect to the Zenoh router in the Cloud
+## Run the simulation and rviz
 
-1. In robot container's `~/container_data/ROUTER_CONFIG.json5` file, modify the `connect/endpoints` list to only include `"tcp/roscon.zenoh.io:7447"`
-
-2. In the control container's `~/container_data/SESSION_CONFIG.json5` file, modify the `connect/endpoints` list to only include `"tcp/roscon.zenoh.io:7447"`
-
-3. In the robot container, run:
+1. In the robot container, run:
 
    * `just router`
    * `just rox_simu`
    * `just rox_nav2`
 
-4. In the control container, run:  
+2. In the control container, run:  
    `just rviz_nav2`
 
 ---
