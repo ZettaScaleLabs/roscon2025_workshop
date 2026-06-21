@@ -12,7 +12,7 @@ Run those commands on your host:
 
 ```bash
 # Download the root CA key and certificate from roscon.zenoh.io
-curl -O --output-dir tls/ http://roscon.zenoh.io/tls/root_ca.cert
+curl -O --output-dir tls/ http://roscon.zenoh.io/tls/root_ca.crt
 curl -O --output-dir tls/ http://roscon.zenoh.io/tls/root_ca.key
 
 # Create key and certificate for the robot (1 year validity)
