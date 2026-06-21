@@ -15,7 +15,7 @@ In 2 distinct terminals:
 2. Run the simulation:
    `just rox_simu`
 
-To run the simulation in headless mode (without Gazebo UI), you can run:
+To run the simulation in headless mode (without Gazebo UI which is eating a lot of CPU), you can run:
  `just rox_simu no_gui`
 
 ## Run Navigation2 and RViz
