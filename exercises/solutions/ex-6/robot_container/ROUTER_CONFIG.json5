@@ -92,8 +92,8 @@
       // roscon2025_workshop ex-5: configure mTLS
       // On lookback: listen on plain TCP for internal Nodes to connect
       "tcp/localhost:7447",
-      // On external IP: listen on TLS for remote connections
-      "tls/172.1.0.2:7447"
+      // On external IP: listen on QUIC for remote connections
+      "quic/172.1.0.2:7447"
     ],
 
     /// Global listen configuration,
@@ -853,12 +853,12 @@
       // ... outgoing ...
       flows: ["egress"],
       rules: [
-        // 2 Hz for any key expressions containing "/camera/image_raw/"
-        { key_expr: "*/camera/image_raw/**", freq: 2.0 },
+        // 3 Hz for any key expressions containing "/camera/image_raw/"
+        { key_expr: "*/camera/image_raw/**", freq: 3.0 },
         // For TRANSIENT_LOCAL topics, the Subscriber sends a query to retrieve
         // missed publications. Those publications are sent as individual replies
         // in a burst. You might want to downsample the replies, or not...
-        { key_expr: "*/camera/image_raw/**/@adv/**", freq: 2.0 },
+        { key_expr: "*/camera/image_raw/**/@adv/**", freq: 3.0 },
       ],
     },
   ],

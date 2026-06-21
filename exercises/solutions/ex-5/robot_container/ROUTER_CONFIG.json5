@@ -92,8 +92,8 @@
       // roscon2025_workshop ex-5: configure mTLS
       // On lookback: listen on plain TCP for internal Nodes to connect
       "tcp/localhost:7447",
-      // On external IP: listen on TLS for remote connections
-      "tls/172.1.0.2:7447"
+      // On external IP: listen on QUIC for remote connections
+      "quic/172.1.0.2:7447"
     ],
 
     /// Global listen configuration,

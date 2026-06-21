@@ -44,7 +44,7 @@
     /// ROS setting: By default connect to the Zenoh router on localhost on port 7447.
     endpoints: [
       // roscon2025_workshop ex-8: configure connection to roscon.zenoh.io (Note: this server was online only during the workshop)
-      "tcp/roscon.zenoh.io:7447"
+      "quic/roscon.zenoh.io:7447"
     ],
 
     /// Global connect configuration,
@@ -572,8 +572,7 @@
       /// Compression capabilities are negotiated during session establishment.
       /// If both Zenoh nodes support compression, then compression is activated.
       compression: {
-        // roscon2025_workshop ex-6: enable compression
-        enabled: true,
+        enabled: false,
       },
     },
     /// WARNING: multicast communication does not perform any negotiation upon group joining.

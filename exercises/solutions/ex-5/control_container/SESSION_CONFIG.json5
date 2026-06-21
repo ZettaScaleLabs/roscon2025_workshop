@@ -44,7 +44,8 @@
     /// ROS setting: By default connect to the Zenoh router on localhost on port 7447.
     endpoints: [
       // roscon2025_workshop ex-5: configure mTLS
-      "tls/172.1.0.2:7447"
+      // Connect to the robot's router via QUIC
+      "quic/172.1.0.2:7447"
     ],
 
     /// Global connect configuration,
