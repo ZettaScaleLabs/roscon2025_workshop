@@ -1,6 +1,6 @@
 <div align="center">
 
-  <h1>🐲 Zenoh ROSCon(s) 2025/2026 Workshops 🇬🇧 🏴󠁧󠁢󠁳󠁣󠁴󠁿 🇸🇬 🇫🇷 🇩🇪 </h1>
+  <h1>🐲 Zenoh ROSCon 2025/2026 Workshops 🇬🇧 🏴󠁧󠁢󠁳󠁣󠁴󠁿 🇸🇬 🇫🇷 🇩🇪 </h1>
 
   <p>
     <strong> Your first steps with Zenoh as an RMW in ROS 2 </strong>
