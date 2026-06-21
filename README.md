@@ -1,6 +1,6 @@
 <div align="center">
 
-  <h1>🐲 Zenoh ROSCon(s) 2025 Workshop 🇬🇧 🏴󠁧󠁢󠁳󠁣󠁴󠁿 🇸🇬 🇫🇷 🇩🇪 </h1>
+  <h1>🐲 Zenoh ROSCon(s) 2025/2026 Workshops 🇬🇧 🏴󠁧󠁢󠁳󠁣󠁴󠁿 🇸🇬 🇫🇷 🇩🇪 </h1>
 
   <p>
     <strong> Your first steps with Zenoh as an RMW in ROS 2 </strong>
@@ -11,7 +11,8 @@
     <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License EPL" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
   </p>
 
-<sub>Built by the <a href="https://zenoh.io">Zenoh</a> team at <a href="https://www.zettascale.tech">ZettaScale</a> with ❤️</sub>
+<sub>Built by the <a href="https://zenoh.io">Zenoh</a> team at <a href="https://www.zettascale.tech">ZettaScale</a> with ❤️</sub><br>
+<sub>Revised and improved in June 2026 with latest `rmw_zenoh`</sub>
 </div>
 
 ## About
@@ -21,6 +22,10 @@ Welcome! This repository is part of the `ROS 2 Networking Redefined: Deep Dive i
 * [ROSCon UK](https://roscon.org.uk/2025/) 🇬🇧 🏴󠁧󠁢󠁳󠁣󠁴󠁿, on September 16th
 * [ROSCon Singapore](https://roscon.ros.org/2025/) 🇸🇬, on October 27th
 * [ROSCon FR & DE](https://roscon.ros.org/fr/2025/) 🇫🇷 🇩🇪, on November 18th
+
+And 2026:
+
+* [ROSCon FR](https://roscon.ros.org/fr/2026/) 🇫🇷 🇩🇪, on June 22d
 
 It contains all the resources you’ll need to get started with `rmw_zenoh`, the Zenoh middleware for `ROS 2`.
 
